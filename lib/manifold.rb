@@ -1,6 +1,19 @@
 require "manifold/version"
 
 module Manifold
+  class Config
+    attr_accessor :expose, :accept
+
+    def initialize
+      @expose = []
+      @accept = []
+    end
+  end
+
+  def self.config
+    @config ||= Config.new
+  end
+
   class Middleware
     def initialize(app)
       @app = app
@@ -18,25 +31,32 @@ module Manifold
       else
         status, headers, body =  @app.call env
 
-        [status, headers.merge(cors_headers(env)), body]
+        headers['Access-Control-Allow-Origin'] = "*"
+
+        [status, headers, body]
       end
     end
 
     def cors_headers(env)
       headers = {}
 
-      headers['Access-Control-Allow-Origin'] = env['HTTP_ORIGIN']
+      headers['Access-Control-Allow-Origin'] = "*"
 
-      headers['Access-Control-Allow-Methods'] = %w(GET POST PUT DELETE).join(", ")
+      headers['Access-Control-Allow-Methods'] = env['HTTP_ACCESS_CONTROL_REQUEST_METHOD']
 
       headers['Access-Control-Allow-Headers'] = [
         env['HTTP_ACCESS_CONTROL_REQUEST_HEADERS'],
+        Manifold.config.accept,
         'Authorization'
       ].compact.join(', ')
 
-      headers['Access-Control-Expose-Headers'] = ['X-Request-Log-ID'].join(', ')
+      if Manifold.config.expose
+        headers['Access-Control-Expose-Headers'] = Manifold.config.expose.join(', ')
+      end
 
       headers['Access-Control-Allow-Credentials'] = "true"
+
+      headers['Access-Control-Max-Age'] = "1728000"
 
       headers
     end

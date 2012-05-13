@@ -9,8 +9,13 @@ require 'minitest/autorun'
 
 require 'rack/test'
 
+class HelloWorld
+  def self.call(env)
+    [200, {}, ["Hi"]]
+  end
+end
 
-TestApp = Rack::Builder.app do
-  use Manifold
-  lambda { |env| [200, {'Content-Type' => 'text/plain'}, 'OK'] }
+TestApp = Rack::Builder.new do
+  use Manifold::Middleware
+  run HelloWorld
 end
