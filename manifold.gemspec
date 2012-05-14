@@ -16,5 +16,6 @@ Gem::Specification.new do |gem|
   gem.version       = Manifold::VERSION
 
   gem.add_development_dependency "rack-test"
+  gem.add_development_dependency "rails"
   gem.add_development_dependency "simplecov"
 end

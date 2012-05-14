@@ -4,8 +4,16 @@ class ManifoldTest < MiniTest::Unit::TestCase
   include Rack::Test::Methods
 
   def setup
+    @old_expose = Manifold.config.expose
+    @old_accept = Manifold.config.accept
+
     Manifold.config.expose = []
     Manifold.config.accept = []
+  end
+
+  def teardown
+    Manifold.config.expose = @old_expose
+    Manifold.config.accept = @old_accept
   end
 
   def app
