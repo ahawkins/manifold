@@ -71,4 +71,4 @@ end
 
 if defined? Rails
   require 'manifold/railtie'
-endnever
+end
