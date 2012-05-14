@@ -56,7 +56,7 @@ Or install it yourself as:
 # config.ru
 require 'manifold'
 
-Manifold.expose =+ %w(X-Custom-Header)
+Manifold.expose += %w(X-Custom-Header)
 
 use Manifold::Middleware
 run MyApp
@@ -71,8 +71,8 @@ CORS.
 
 ```ruby
 # application.rb
-config.manifold.accept =+ %w(X-Custom-Input-Header) # add custom headers you need
-config.manifold.expose =+ %(X-Custom-Output-Header)
+config.manifold.accept += %w(X-Custom-Input-Header) # add custom headers you need
+config.manifold.expose += %(X-Custom-Output-Header)
 ```
 
 ## Contributing

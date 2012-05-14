@@ -68,3 +68,7 @@ module Manifold
     end
   end
 end
+
+if defined? Rails
+  require 'manifold/railtie'
+endnever
