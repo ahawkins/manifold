@@ -33,6 +33,8 @@ module Manifold
 
         headers['Access-Control-Allow-Origin'] = "*"
 
+        headers['Access-Control-Expose-Headers'] = Manifold.config.expose.join(', ') if Manifold.config.expose
+
         [status, headers, body]
       end
     end
@@ -49,10 +51,6 @@ module Manifold
         Manifold.config.accept,
         'Authorization'
       ].compact.join(', ')
-
-      if Manifold.config.expose
-        headers['Access-Control-Expose-Headers'] = Manifold.config.expose.join(', ')
-      end
 
       headers['Access-Control-Allow-Credentials'] = "true"
 
