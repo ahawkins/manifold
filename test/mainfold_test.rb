@@ -70,16 +70,6 @@ class ManifoldTest < MiniTest::Unit::TestCase
     assert_equal 'text/plain', last_response.content_type
   end
 
-  def test_allows_for_custom_headers_exposed
-    Manifold.config.expose = ["X-Request-ID"]
-
-    preflight "PATCH"
-
-    assert last_response.ok?
-    headers = last_response.headers
-    assert_equal "X-Request-ID", headers['Access-Control-Expose-Headers']
-  end
-
   def tests_allow_for_custom_headers_accept
     Manifold.config.accept = ["X-Rate-Limit"]
 
@@ -96,6 +86,16 @@ class ManifoldTest < MiniTest::Unit::TestCase
     assert last_response.ok?
     headers = last_response.header
     assert headers['Access-Control-Max-Age']
+  end
+
+  def test_allows_for_custom_headers_exposed
+    Manifold.config.expose = ["X-Request-ID"]
+
+    get "/"
+
+    assert last_response.ok?
+    headers = last_response.headers
+    assert_equal "X-Request-ID", headers['Access-Control-Expose-Headers']
   end
 
   def test_adds_cors_support_for_simple_requests
