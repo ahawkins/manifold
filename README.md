@@ -1,6 +1,14 @@
-# Manifold
+# Manifold: Cross Origin Resource Sharing for Public API's
 
-Mainfold: A generous CORS implementation designed for public APIs.
+[![Build Status](https://secure.travis-ci.org/twinturbo/manifold.png?branch=master)][travis]
+[![Gem Version](https://badge.fury.io/rb/manifold.png)][gem]
+[![Code Climate](https://codeclimate.com/github/twinturbo/manifold.png)][codeclimate]
+[![Dependency Status](https://gemnasium.com/twinturbo/manifold.png?travis)][gemnasium]
+
+[gem]: https://rubygems.org/gems/manifold
+[travis]: http://travis-ci.org/twinturbo/manifold
+[gemnasium]: https://gemnasium.com/twinturbo/manifold
+[codeclimate]: https://codeclimate.com/github/twinturbo/manifold
 
 Use this if you don't care about CORS problems and never want to see
 them again.
